@@ -9,7 +9,7 @@ interface ProductRepositoryContract extends RepositoryContract
 {
     public function getById(
         int $id
-    ): Product;
+    ): ?Product;
 
     public function deleteById(
         int $id

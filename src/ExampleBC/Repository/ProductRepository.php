@@ -19,7 +19,7 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
      * @return Product
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getById(int $id): Product
+    public function getById(int $id): ?Product
     {
         $query = $this->createQueryBuilder('p');
         $query->where($query->expr()->eq('p.id', ':id'))

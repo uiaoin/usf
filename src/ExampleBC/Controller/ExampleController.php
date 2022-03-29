@@ -2,14 +2,12 @@
 
 namespace App\ExampleBC\Controller;
 
-use App\ExampleBC\Domain\Entity\Product;
-use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryContract;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\AbstractController;
+use App\ExampleBC\Command\CreateCommand;
+use App\ExampleBC\Query\ShowQuery;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\expr;
 
 class ExampleController extends AbstractController
 {
@@ -18,57 +16,57 @@ class ExampleController extends AbstractController
      * @return JsonResponse
      */
     public function create(
-        EntityManagerInterface $manager,
-        ValidatorInterface $validator
+        Request $request
     ): JsonResponse
     {
-        $product = new Product(
-            '测试产品', '这是一个不错的测试产品'
+
+        // don't use serializer and messenger
+//        EntityManagerInterface $manager,
+//        ValidatorInterface $validator
+//        $product = new Product(
+//            'Test product', 'This ia niubility product'
+//        );
+//        $manager->persist($product);
+//        $errors = $validator->validate($product);
+//        if (count($errors) > 0) {
+//            return new JsonResponse([
+//                'errors' => (string) $errors
+//            ]);
+//        }
+//        $manager->flush();
+
+        // use serializer and messenger
+        // and take the codes into command handler
+        $this->desHandle(
+            $request->getContent(),
+            CreateCommand::class
         );
-        $manager->persist($product);
-        $errors = $validator->validate($product);
-        if (count($errors) > 0) {
-            return new JsonResponse([
-                'errors' => (string) $errors
-            ]);
-        }
 
-        $manager->flush();
-
-        return new JsonResponse([
-            'data' => $product->getId()
+        return $this->json([
+            'data' => 'ok'
         ]);
     }
 
     /**
      * @Route("/show/{id}", name="example_show")
+     * @param Request $request
      * @return JsonResponse
      */
     public function show(
-        int $id,
-        ProductRepositoryContract $productRepositoryContract
+        Request $request
     ): JsonResponse
     {
-        $product = $productRepositoryContract->getById($id);
-        return $this->json([
-            'title' => $product ? $product->getTitle() : null
-        ]);
-    }
+        // don't use serializer and messenger
+//        $product = $productRepositoryContract->getById($id);
+//        return $this->json([
+//            'title' => $product ? $product->getTitle() : null
+//        ]);
 
-    /**
-     * @Route("/delete/{id}", method="GET", name="example_delete")
-     * @return JsonResponse
-     */
-    public function delete(
-        int $id,
-        ProductRepositoryContract $productRepositoryContract
-    ): JsonResponse
-    {
-        var_dump($productRepositoryContract->deleteById($id));
-        exit();
+        // use serializer and messenger
+        $data = $this->desHandle($request->getContent(), ShowQuery::class);
 
         return $this->json([
-            'data' => 'ok'
+            'desc' => $data
         ]);
     }
 }
