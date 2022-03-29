@@ -11,8 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExampleController extends AbstractController
 {
+
     /**
      * @Route("/new", name="example_new")
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function create(
@@ -49,6 +52,7 @@ class ExampleController extends AbstractController
 
     /**
      * @Route("/show/{id}", name="example_show")
+     *
      * @param Request $request
      * @return JsonResponse
      */
