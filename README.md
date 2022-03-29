@@ -16,8 +16,8 @@ If the application is simple, you can delete **ExampleBC** directory, then retai
 Else, you can create other BC like OrderBC,ProductBC...
 
 ### doctrine
-* After defined entity, you can exec this command  helps you sync ddl to database.
+* After defined entity, you can execute this command  helps you synchronize ddl to database.
 ```bash
 $ php bin/console make:migration # create migration
-$ php bin/console doctrine:migrations:migrate # exec migration
+$ php bin/console doctrine:migrations:migrate # execute migration
 ```
