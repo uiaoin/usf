@@ -3,7 +3,7 @@
 namespace App\ExampleBC\Repository;
 
 use App\ExampleBC\Domain\Entity\Product;
-use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryInterface;
+use App\ExampleBC\Repository\RepositoryInterface\ProductRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

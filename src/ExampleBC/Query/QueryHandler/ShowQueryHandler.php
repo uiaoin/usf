@@ -3,7 +3,7 @@
 namespace App\ExampleBC\Query\QueryHandler;
 
 use App\ExampleBC\Query\ShowQuery;
-use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryInterface;
+use App\ExampleBC\Repository\RepositoryInterface\ProductRepositoryInterface;
 
 class ShowQueryHandler
 {

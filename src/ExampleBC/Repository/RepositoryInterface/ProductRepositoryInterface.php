@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ExampleBC\Repository\RepositoryContract;
+namespace App\ExampleBC\Repository\RepositoryInterface;
 
 use App\Contract\Repository\RepositoryInterface;
 use App\ExampleBC\Domain\Entity\Product;
