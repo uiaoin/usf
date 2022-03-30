@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Message\AsyncMessageInterface;
+use App\Contract\Message\AsyncMessageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\Messenger\HandleTrait;

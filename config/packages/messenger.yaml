@@ -12,4 +12,4 @@ framework:
 
         routing:
             # Route your messages to the transports
-#            'App\Message\AsyncMessageInterface': async
+            'App\Contract\Message\AsyncMessageInterface': async

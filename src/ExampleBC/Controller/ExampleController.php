@@ -41,12 +41,10 @@ class ExampleController extends AbstractController
 
         // use serializer and messenger
         // and take the codes into command handler
-//        $this->desHandle(
-//            $request->getContent(),
-//            CreateCommand::class
-//        );
-
-
+        $this->desHandle(
+            $request->getContent(),
+            CreateCommand::class
+        );
 
         return $this->json([
             'data' => 'ok'
