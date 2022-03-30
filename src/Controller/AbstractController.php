@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Message\AsyncMessageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\Messenger\HandleTrait;
@@ -75,7 +76,7 @@ abstract class AbstractController extends Controller
     {
         $object = $this->deserialize($json, $type);
 
-        return $this->h($object);
+        return $this->handle($object);
     }
 
     /**
@@ -84,6 +85,11 @@ abstract class AbstractController extends Controller
      */
     public function handle(object $object)
     {
+        // async
+        if ($object instanceof AsyncMessageInterface) {
+            return $this->messageBus->dispatch($object);
+        }
+
         return $this->h($object);
     }
 }

@@ -5,10 +5,11 @@ namespace App\ExampleBC\Command\CommandHandler;
 use App\ExampleBC\Command\CreateCommand;
 use App\ExampleBC\Domain\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CreateCommandHandler
+class CreateCommandHandler implements MessageHandlerInterface
 {
     /**
      * @var EntityManagerInterface

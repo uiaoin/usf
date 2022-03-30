@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Command;
+namespace App\Contract\Message;
 
 /**
- * 写入
  * Interface CommandInterface
- * @package App\Command
+ * @package App\Contract\Message
  */
 interface CommandInterface
 {

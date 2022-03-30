@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Query;
+namespace App\Contract\Message;
 
 /**
- * 查询
  * Interface QueryInterface
- * @package App\Query
+ * @package App\Contract\Message
  */
 interface QueryInterface
 {

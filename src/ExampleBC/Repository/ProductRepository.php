@@ -3,11 +3,11 @@
 namespace App\ExampleBC\Repository;
 
 use App\ExampleBC\Domain\Entity\Product;
-use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryContract;
+use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class ProductRepository extends ServiceEntityRepository implements ProductRepositoryContract
+class ProductRepository extends ServiceEntityRepository implements ProductRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

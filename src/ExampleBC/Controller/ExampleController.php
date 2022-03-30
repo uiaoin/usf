@@ -7,6 +7,7 @@ use App\ExampleBC\Command\CreateCommand;
 use App\ExampleBC\Query\ShowQuery;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ExampleController extends AbstractController
@@ -40,10 +41,12 @@ class ExampleController extends AbstractController
 
         // use serializer and messenger
         // and take the codes into command handler
-        $this->desHandle(
-            $request->getContent(),
-            CreateCommand::class
-        );
+//        $this->desHandle(
+//            $request->getContent(),
+//            CreateCommand::class
+//        );
+
+
 
         return $this->json([
             'data' => 'ok'

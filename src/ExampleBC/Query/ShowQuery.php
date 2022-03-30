@@ -2,7 +2,7 @@
 
 namespace App\ExampleBC\Query;
 
-use App\Query\QueryInterface;
+use App\Contract\Message\QueryInterface;
 
 class ShowQuery implements QueryInterface
 {

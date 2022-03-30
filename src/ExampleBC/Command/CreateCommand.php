@@ -2,9 +2,9 @@
 
 namespace App\ExampleBC\Command;
 
-use App\Command\CommandInterface;
+use App\Contract\Message\AsyncMessageInterface;
 
-class CreateCommand implements CommandInterface
+class CreateCommand implements AsyncMessageInterface
 {
     private $title;
     private $description;

@@ -3,14 +3,14 @@
 namespace App\ExampleBC\Query\QueryHandler;
 
 use App\ExampleBC\Query\ShowQuery;
-use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryContract;
+use App\ExampleBC\Repository\RepositoryContract\ProductRepositoryInterface;
 
 class ShowQueryHandler
 {
     private $productRepositoryContract;
 
     public function __construct(
-        ProductRepositoryContract $productRepositoryContract
+        ProductRepositoryInterface $productRepositoryContract
     )
     {
         $this->productRepositoryContract = $productRepositoryContract;

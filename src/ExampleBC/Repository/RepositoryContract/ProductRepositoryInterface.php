@@ -2,10 +2,10 @@
 
 namespace App\ExampleBC\Repository\RepositoryContract;
 
+use App\Contract\Repository\RepositoryInterface;
 use App\ExampleBC\Domain\Entity\Product;
-use App\Repository\RepositoryContract;
 
-interface ProductRepositoryContract extends RepositoryContract
+interface ProductRepositoryInterface extends RepositoryInterface
 {
     public function getById(
         int $id

@@ -21,30 +21,30 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # messenger 配置
-    # app_query_handler 单一小应用
-    # bc_query_handler 模块化复杂应用
-    app_query_handler:
+    # message_handler
+    # *.app simple application
+    # *.bc modularization,complex application
+    message_handler.query.app:
         namespace: App\Query\QueryHandler\
         resource: '../src/Query/QueryHandler'
         tags: [messenger.message_handler]
 
-    app_command_handler:
+    message_handler.command.app:
         namespace: App\Command\CommandHandler\
         resource: '../src/Command/CommandHandler'
         tags: [messenger.message_handler]
 
-    bc_query_handler:
+    message_handler.query.bc:
         namespace: App\
         resource: '../src/*/Query/QueryHandler'
         tags: [messenger.message_handler]
 
-    bc_command_handler:
+    message_handler.command.bc:
         namespace: App\
         resource: '../src/*/Command/CommandHandler'
         tags: [messenger.message_handler]
 
-    # 反序列化配置
-    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
-        public: false
-        tags: [serializer.normalizer]
+    # serializer.normalizer
+#    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+#        public: false
+#        tags: [serializer.normalizer]
