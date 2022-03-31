@@ -1,10 +1,8 @@
 <?php
 
-namespace App\ExampleBC\Query;
+namespace App\ExampleBC\Message\Query;
 
-use App\Contract\Message\QueryInterface;
-
-class ShowQuery implements QueryInterface
+class ShowQuery
 {
     private $id;
 

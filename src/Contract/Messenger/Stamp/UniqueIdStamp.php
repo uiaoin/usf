@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Messenger;
+namespace App\Contract\Messenger\Stamp;
 
 use Symfony\Component\Messenger\Stamp\StampInterface;
 
 /**
- * 邮票，可以在将邮票放进信封以添加一些信息
+ * Messenger stamp
  * Class UniqueIdStamp
- * @package App\Messenger
+ * @package App\Contract\Messenger\Stamp
  */
 class UniqueIdStamp implements StampInterface
 {

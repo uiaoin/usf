@@ -1,13 +1,14 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
-        - messenger_audit
+        - messenger
+        - customer
 
     handlers:
         main:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%.log"
-            level: error
+            level: debug
             channels: ["!event", "!doctrine", "!messenger"]
             max_files: 10
 #            formatter: 'monolog.formatter.json'
@@ -21,7 +22,13 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/messenger.log"
             level: debug
-            channels: ["messenger_audit"]
+            channels: ["messenger"]
+
+        customer:
+            type: rotating_file
+            path: "%kernel.logs_dir%/customer-%kernel.environment%.log"
+            channels: ["customer"]
+            formatter: 'monolog.formatter.json'
 
 #when@dev:
 #    monolog:

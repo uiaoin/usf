@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Contract\Controller;
 
-use App\Contract\Message\AsyncMessageInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use App\Contract\Messenger\HandleTrait;
+use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
@@ -13,14 +12,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 abstract class AbstractController extends Controller
 {
-    use HandleTrait {
-        HandleTrait::handle as h;
-    }
-
-    /**
-     * @var MessageBusInterface
-     */
-    private $messageBus;
+    use HandleTrait;
 
     /**
      * @var SerializerInterface
@@ -29,11 +21,13 @@ abstract class AbstractController extends Controller
 
     public function __construct(
         MessageBusInterface $messageBus,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        MessageBusInterface $eventBus
     )
     {
         $this->messageBus = $messageBus;
         $this->serializer = $serializer;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -49,7 +43,8 @@ abstract class AbstractController extends Controller
         $type,
         $format = JsonEncoder::FORMAT,
         $context = [
-            AbstractObjectNormalizer::PRESERVE_EMPTY_OBJECTS => true
+            AbstractObjectNormalizer::PRESERVE_EMPTY_OBJECTS => true,
+            AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
         ]
     ): object
     {
@@ -61,7 +56,6 @@ abstract class AbstractController extends Controller
 
         return $object;
     }
-
 
     /**
      * Deserialize and handle
@@ -77,19 +71,5 @@ abstract class AbstractController extends Controller
         $object = $this->deserialize($json, $type);
 
         return $this->handle($object);
-    }
-
-    /**
-     * @param object $object
-     * @return mixed
-     */
-    public function handle(object $object)
-    {
-        // async
-        if ($object instanceof AsyncMessageInterface) {
-            return $this->messageBus->dispatch($object);
-        }
-
-        return $this->h($object);
     }
 }

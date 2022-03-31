@@ -1,12 +1,11 @@
 <?php
 
-namespace App\ExampleBC\Command;
+namespace App\ExampleBC\Message\Command;
 
-use App\Contract\Message\AsyncMessageInterface;
-
-class CreateCommand implements AsyncMessageInterface
+class CreateCommand
 {
     private $title;
+
     private $description;
 
     public function __construct(
@@ -33,4 +32,6 @@ class CreateCommand implements AsyncMessageInterface
     {
         return $this->description;
     }
+
+
 }

@@ -2,16 +2,15 @@
 
 namespace App\ExampleBC\Controller;
 
-use App\Controller\AbstractController;
-use App\ExampleBC\Command\CreateCommand;
-use App\ExampleBC\Query\ShowQuery;
+use App\Contract\Controller\AbstractController;
+use App\ExampleBC\Message\Command\CreateCommand;
+use App\ExampleBC\Message\Query\ShowQuery;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ExampleController extends AbstractController
 {
-
     /**
      * @Route("/new", name="example_new")
      *
@@ -22,7 +21,6 @@ class ExampleController extends AbstractController
         Request $request
     ): JsonResponse
     {
-
         // don't use serializer and messenger
 //        EntityManagerInterface $manager,
 //        ValidatorInterface $validator
@@ -40,10 +38,7 @@ class ExampleController extends AbstractController
 
         // use serializer and messenger
         // and take the codes into command handler
-        $this->desHandle(
-            $request->getContent(),
-            CreateCommand::class
-        );
+        $this->desHandle($request->getContent(), CreateCommand::class);
 
         return $this->json([
             'data' => 'ok'
