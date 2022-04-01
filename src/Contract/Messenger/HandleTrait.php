@@ -32,14 +32,14 @@ trait HandleTrait
             return $this->eventBus->dispatch($message);
         }
 
-        if (!$this->messageBus instanceof MessageBusInterface) {
+        if (! $this->messageBus instanceof MessageBusInterface) {
             throw new LogicException(sprintf('You must provide a "%s" instance in the "%s::$messageBus" property, "%s" given.', MessageBusInterface::class, static::class, get_debug_type($this->messageBus)));
         }
 
-        if ($message instanceof AsyncMessageInterface) {
-            return $this->messageBus->dispatch($message);
+        if (! $message instanceof AsyncMessageInterface) {
+            return $this->sfh($message);
         }
 
-        return $this->sfh($message);
+        return $this->messageBus->dispatch($message);
     }
 }
